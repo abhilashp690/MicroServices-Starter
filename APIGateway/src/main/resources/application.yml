@@ -1,0 +1,32 @@
+server:
+  port: 9093
+
+eureka:
+  client:
+    register-With-Eureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eurekaserver:8767/eureka
+
+spring:
+  application:
+    name: apigatewayservice
+  cloud:
+    gateway:
+      routes:
+        - id: USER_SERVICE
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/user/**
+
+        - id: DEPARTMENT_SERVICE
+          uri: lb://DEPARTMENTSERVICE
+          predicates:
+            - Path=/department/**
+
+
+
+
+
+
+
